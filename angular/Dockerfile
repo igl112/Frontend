@@ -13,6 +13,8 @@ COPY . .
 RUN npm run build
 
 FROM nginx:latest
+RUN rm etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
 COPY --from=builder /angular/dist/angular /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
