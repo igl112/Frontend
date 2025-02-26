@@ -7,7 +7,7 @@ import { EquipoComponent } from './components/equipo/equipo.component';
   selector: 'app-root',
   imports: [RouterOutlet, IndexComponent, EquipoComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'angular';
