@@ -1,0 +1,55 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #222;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: top 0.3s ease-in-out;
+  
+    /* Navegación la cabecera */
+    nav {
+      ul {
+        list-style: none;
+        display: flex;
+  
+        li {
+          margin: 0 15px;
+          position: relative;
+          transition: transform 0.3s ease-in-out;
+  
+          a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+            font-family: "Maxlock", sans-serif;
+          }
+  
+          a:hover {
+            color: #ffffff;
+          }
+        }
+  
+        li:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  
+    /* Imagen del logotipo */
+    .imagen {
+      width: 100px;
+      height: auto;
+      border-radius: 6%;
+      transition: transform 0.5s ease;
+    }
+  
+    .imagen:hover {
+      transform: scale(1.1);
+    }
+  }
