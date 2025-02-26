@@ -174,7 +174,7 @@
     }
   }
   .parallax {
-    background-image: url("../img/FotosGenerales/barberia-vigo.jpg");
+    background-image: url("../../../../public/img/FotosGenerales/barberia-vigo.jpg");
     height: 550px;
     background-attachment: fixed;
     background-position: center;

@@ -174,7 +174,7 @@
     }
   }
   .parallax {
-    background-image: url("../../../../public/img/barberia-vigo.jpg");
+    background-image: url("../../../../public/img/FotosGenerales/barberia-vigo.jpg");
     height: 550px;
     background-attachment: fixed;
     background-position: center;
@@ -299,61 +299,118 @@
     }
   }
   
-/* Estilos index */
-/*Secciones de texto de INDEX*/
-.sectionIndex {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 50px 30px;
-    background-color: #f8f8f8;
-    gap: 20px;
-    flex-wrap: wrap;
-  
+/*Secciones de texto del main*/
+.section {
+    padding: 30px 30px;
+    text-align: center;
     h2 {
-      font-size: 35px;
-      color: #333;
-      margin-bottom: 20px;
-      width: 100%;
-      font-family: "Maxlock", sans-serif;
-    }
-  
-    p {
-      font-size: 18px;
-      color: #666;
-      margin-bottom: 30px;
-      width: 100%;
-      text-align: justify;
-    }
-  }
-  
-  .contenido {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    width: 80%;
-    margin: 0 auto;
-    .textoBarberia {
-      font-size: 22px;
-      color: #666;
-      margin-bottom: 30px;
-      h2 {
-        font-size: 40px;
+        font-size: 32px;
         color: #333;
-        margin-bottom: 40px;
-      }
+        margin-bottom: 20px;
+        font-family: 'Maxlock', sans-serif;
     }
-    /* Imagen barber */
-    img {
-      width: 700px;
-      height: auto;
-      border-radius: 2%;
-      transition: transform 0.5s ease;
+}
+/* Decoracion de titulos h2*/
+.h2titulos{
+    border-bottom:thin gray solid;
+    padding-bottom: 8px;
+    min-width: 450px;
+    width:  auto;
+    display:inline-block;
+   
+}
+
+/* Contenedor de servicios */
+.container {
+    justify-content: center;
+    margin-top: 30px;
+    .service {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+        /* fotos de servicios */
+        img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        /*Texto de servicios */
+        h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+        }
     }
-    img:hover {
-      transform: scale(1.1);
+    
+}
+
+/* Comentarios de clientes */
+.comentarios {
+    padding: 50px 5%;
+    background-color: #fff;
+    text-align: center;
+    h2 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 30px;
     }
-  }
+    .comentario {
+        display: flex;
+        align-items: center;
+        background-color: #f8f8f8;
+        border-left: 5px solid #e67e22;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 900px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        flex-wrap: wrap;
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+            border: 3px solid #e67e22;
+        }
+        .texto {
+            flex: 1;
+            min-width: 250px;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .cliente {
+            font-weight: bold;
+            color: #e67e22;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .comentario {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .comentario img {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+}
+
+  
