@@ -1,14 +1,14 @@
 /*Fuentes de letras exportadas*/
 @font-face {
     font-family: 'Maxlock';
-    src: url('/assets/maxlock/Maxlock.otf') format('truetype'),
-    url('assets/maxlock/Maxlock.otf') format('opentype');
+    src: url('../../assets/maxlock/Maxlock.otf') format('truetype'),
+    url('../../assets/maxlock/Maxlock.otf') format('opentype');
 }
 
 @font-face {
     font-family: 'Blenda-script';
-    src: url('blenda_script/Blenda\ Script.otf') format('truetype'),
-    url('blenda_script/Blenda\ Script.otf') format('opentype');
+    src: url('../../assets/blenda_script/Blenda\ Script.otf') format('truetype'),
+    url('../../assets/blenda_script/Blenda\ Script.otf') format('opentype');
 }
 
 /* Estilos generales */
@@ -174,7 +174,7 @@
     }
   }
   .parallax {
-    background-image: url("../img/FotosGenerales/barberia-vigo.jpg");
+    background-image: url("../../assets/img/barberia-vigo.jpg");
     height: 550px;
     background-attachment: fixed;
     background-position: center;
