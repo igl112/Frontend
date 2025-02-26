@@ -1,22 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Configura la vista para dispositivos móviles -->
-    <link
-      rel="icon"
-      href="../../assets/img/FotosGenerales/LogoBarberia.png"
-      type="image/jpeg"
-    />
-    <!-- Ícono del sitio -->
-    <title>Peluquería Barbers</title>
 
-  </head>
   <body>
     <app-header />
-
-
     <!-- Cuerpo de la pagina-->
     <main>
       <app-parallax />
@@ -37,45 +21,43 @@
             </p>
           </div>
           <div>
-            <img src="../../assets/img/inicio/barberia.jpg" alt="Imagen de Barbería" />
+            <img src="img/inicio/barberia.jpg" alt="Imagen de Barbería" />
           </div>
         </div>
       </section>
     </main>
     <!-- Pie de pagina -->
-
     <app-footer />
-
-    <script>
-      //Declarciones
-      let lastScrollTop = 0;
-      let isScrolling;
-      const header = document.querySelector("header");
-
-      // Oculta y muestra el header al hacer scroll
-      window.addEventListener("scroll", function () {
-        let scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop) {
-          header.style.top = "-100px"; // Ajusta según el tamaño de tu cabecera
-        } else {
-          header.style.top = "0";
-        }
-
-        clearTimeout(isScrolling);
-        isScrolling = setTimeout(function () {
-          header.style.top = "0";
-        }, 1000);
-
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-      });
-
-      // Función para mostrar u ocultar el menú en móviles
-      function toggleMenu() {
-        const menu = document.getElementById("menu");
-        menu.classList.toggle("active");
-      }
-    </script>
   </body>
-</html>
+
+  <script>
+    //Declarciones
+    let lastScrollTop = 0;
+    let isScrolling;
+    const header = document.querySelector("header");
+
+    // Oculta y muestra el header al hacer scroll
+    window.addEventListener("scroll", function () {
+      let scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        header.style.top = "-100px"; // Ajusta según el tamaño de tu cabecera
+      } else {
+        header.style.top = "0";
+      }
+
+      clearTimeout(isScrolling);
+      isScrolling = setTimeout(function () {
+        header.style.top = "0";
+      }, 1000);
+
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    });
+
+    // Función para mostrar u ocultar el menú en móviles
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("active");
+    }
+  </script>
