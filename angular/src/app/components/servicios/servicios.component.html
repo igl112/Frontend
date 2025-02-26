@@ -6,7 +6,7 @@
     <!-- Configura la vista para dispositivos móviles -->
     <link
       rel="icon"
-      href="../../../../public/img/FotosGenerales/LogoBarberia.png"
+      href="img/FotosGenerales/LogoBarberia.png"
       type="image/jpeg"
     />
     <!-- Ícono del sitio -->
@@ -14,6 +14,33 @@
 
   </head>
   <body>
+    <!-- Cabecera -->
+    <header>
+      <!-- Logo con enlace a la portada -->
+      <a href="portada.html">
+        <img
+          class="imagen"
+          src="img/FotosGenerales/LogoBarberia.png"
+          alt="Logo de la Peluquería"
+        />
+      </a>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <!-- Menú de navegación -->
+      <nav id="menu">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="pagina2.html">Equipo</a></li>
+          <li><a href="pagina3.html">Servicios</a></li>
+          <li><a href="pagina4.html">Contacto</a></li>
+          <li><a href="AcercaDe.html">Acerca de</a></li>
+        </ul>
+      </nav>
+    </header>
     <!-- Cuerpo de la pagina-->
     <main>
       <div class="parallax"></div>
@@ -62,7 +89,7 @@
         <h2 class="h2titulos">Opiniones de Nuestros Clientes</h2>
         <!-- comentarios carlos -->
         <div class="comentario">
-          <img src="../../../../public/img/clientes/carlos.jpg" alt="Cliente 1" />
+          <img src="img/clientes/carlos.jpg" alt="Cliente 1" />
           <div class="texto">
             <p>
               "Un excelente servicio, atención profesional y un corte impecable.
@@ -75,7 +102,7 @@
         </div>
         <!-- comentarios Laura -->
         <div class="comentario">
-          <img src="../../../../public/img/clientes/Laura.png" alt="Cliente 2" />
+          <img src="img/clientes/Laura.png" alt="Cliente 2" />
           <div class="texto">
             <p>
               "Me encantó el ambiente y la calidad del corte. La barbería tiene
@@ -88,7 +115,7 @@
         </div>
         <!-- comentarios Andres -->
         <div class="comentario">
-          <img src="../../../../public/img/clientes/andre.jpg" alt="Cliente 3" />
+          <img src="img/clientes/andre.jpg" alt="Cliente 3" />
           <div class="texto">
             <p>
               "El mejor arreglo de barba que he tenido. Atención de primera y
@@ -118,7 +145,7 @@
       <div class="modal-content">
         <span class="close-btn" onclick="closeModal(1)">&times;</span>
         <h2>Corte al Gusto</h2>
-        <img src="../../../../public/img/Servicios/cortePelo.png" alt="Corte de pelo" />
+        <img src="img/Servicios/cortePelo.png" alt="Corte de pelo" />
         <p>Un corte tradicional y elegante para cualquier ocasión.</p>
       </div>
     </div>
@@ -127,7 +154,7 @@
       <div class="modal-content">
         <span class="close-btn" onclick="closeModal(2)">&times;</span>
         <h2>Arreglo de Barba</h2>
-        <img src="../../../../public/img/Servicios/Barba.png" alt="Corte de barba" />
+        <img src="img/Servicios/Barba.png" alt="Corte de barba" />
         <p>
           Definición y estilo para tu barba, con afeitado a navaja si lo
           prefieres
@@ -140,7 +167,7 @@
         <span class="close-btn" onclick="closeModal(3)">&times;</span>
         <h2>Corte y Arreglo de Barba</h2>
         <img
-          src="../../../../public/img/Servicios/CorteBarbaPelo.png"
+          src="img/Servicios/CorteBarbaPelo.png"
           alt="Corte de pelo y barba"
         />
         <p>
@@ -153,7 +180,7 @@
       <div class="modal-content">
         <span class="close-btn" onclick="closeModal(4)">&times;</span>
         <h2>Coloración y Tintes de Pelo</h2>
-        <img src="../../../../public/img/Servicios/tinte.png" alt="tinte" />
+        <img src="img/Servicios/tinte.png" alt="tinte" />
         <p>Tintes y reflejos para un look renovado y moderno.</p>
       </div>
     </div>
@@ -213,4 +240,3 @@
     </script>
   </body>
 </html>
-
