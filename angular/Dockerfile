@@ -26,5 +26,8 @@ EXPOSE 80
 # Copia los archivos generados en la etapa de construcción al directorio de Nginx
 COPY --from=builder /angular/dist/angular/browser /usr/share/nginx/html
 
+# Copiar la configuración personalizada de Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Comando para iniciar Nginx
 CMD ["nginx", "-g", "daemon off;"]
