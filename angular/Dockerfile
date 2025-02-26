@@ -2,7 +2,7 @@
 FROM node:latest AS dev-deps
 WORKDIR /angular
 
-COPY package.json package.json
+COPY package.json package.json ./
 
 RUN npm install
 
