@@ -1,20 +1,21 @@
 #Etapa 1: Construcción de la aplicación Angular (Node.js)
-FROM node:latest AS dev-deps
+FROM node:19.5.0-alpine AS dev-deps
 WORKDIR /angular
 
-COPY package.json package.json ./
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm install 
 
-FROM node:latest AS builder
+FROM node:19.5.0-alpine AS builder
 WORKDIR /angular
-COPY --from=dev-deps /angular/node_modules ./node_modules
+
+COPY --from=dev-deps /angular/node_modules /angular/node_modules
+
 COPY . .
-RUN npm run build
 
-FROM nginx:latest
-RUN rm etc/nginx/conf.d/default.conf
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+RUN npm run build --prod
+
+FROM nginx:latest AS prod
 EXPOSE 80
 COPY --from=builder /angular/dist/angular /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
