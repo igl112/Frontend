@@ -23,7 +23,7 @@ export class LoginComponent {
     };
 
     router = inject(Router);
-    http = inject(HttpClient)
+    http = inject(HttpClient);
 
     onLogin() {
       debugger;
@@ -32,10 +32,9 @@ export class LoginComponent {
       } else {
         alert("Wrong credentials")
       } */
-      this.http.get("http://localhost:8001/login").subscribe((res:any)=> {
+      this.http.post("http://localhost:8001/login", this.loginObj).subscribe((res:any)=> {
         debugger;
-        console.log(res)
-        //localStorage.setItem("angular19user",res.data.userId)
+        localStorage.setItem("angular19user",res.data.userId)
         this.router.navigateByUrl("admin")
       }, errors=>{
         alert("Wrong credentials.");
