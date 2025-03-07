@@ -8,11 +8,16 @@ import { catchError, map,Observable, tap, throwError } from 'rxjs';
 })
 export class AuthService {
 
-  baseURL = 'http://localhost:8001'; //Aquí va la url
+  baseURL = 'http://localhost:8001/login'; //Aquí va la url
 
   router = inject(Router);
 
   http = inject(HttpClient);
+
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.baseURL}/login`, credentials);
+  }
+
 
   refreshToken(): Observable<string> {
     const refreshToken = localStorage.getItem('refreshToken');
