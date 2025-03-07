@@ -14,8 +14,8 @@ import { AuthService } from '../../private/services/auth.service';
 export class LoginComponent {
 
     loginObj: any = {
-      username: '',
-      password: ''
+      "email": "",
+      "contrasena": ""
     };
 
     apiLoginObj: any = {
