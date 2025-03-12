@@ -9,6 +9,7 @@ import { catchError, map, mergeMap, tap, throwError } from 'rxjs';
 })
 export class AuthService {
   baseURL = 'http://localhost:8001/login'; // Aquí va la url
+  registerURL = 'http://localhost:8001/register';
 
   router = inject(Router);
   http = inject(HttpClient);
@@ -44,5 +45,36 @@ export class AuthService {
     );
   }
 
+  // Registro
+  register(credentials: { nombre: string, nombreUsuario: string, email: string, contrasena: string, contrasena_confirmation: string }): Observable<any> {
+    return this.getCsrfToken().pipe(
+      mergeMap((response) => {
+        const headers = new HttpHeaders({
+          'X-CSRF-TOKEN': response.csrf_token,
+          'Content-Type': 'application/json',
+        });
+
+        return this.http.post(this.registerURL, credentials, {
+          withCredentials: true,
+          headers: headers,
+        });
+      }),
+      catchError((error) => {
+        console.error('Error en el registro:', error);
+        return throwError(() => new Error(error));
+      })
+    );
+  }
+
   constructor() {}
 }
+/*}).pipe(
+        catchError((error) => {
+          console.error('Error en el registro:', error);
+          if (error.status === 422) {
+            console.error('Errores de validación:', error.error.errors);
+          }
+          return throwError(() => new Error(error));
+        })
+      );
+      */
