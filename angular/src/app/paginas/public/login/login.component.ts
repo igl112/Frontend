@@ -3,11 +3,12 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../private/services/auth.service';
+import { HeaderComponent } from '../../../components/header/header.component';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, HeaderComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

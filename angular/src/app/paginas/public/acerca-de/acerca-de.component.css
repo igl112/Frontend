@@ -1,14 +1,14 @@
 /*Fuentes de letras exportadas*/
 @font-face {
   font-family: 'Maxlock';
-  src: url('../../../../assets/maxlock/Maxlock.otf') format('truetype'),
-  url('../../../../assets/maxlock/Maxlock.otf') format('opentype');
+  src: url('../../../assets/maxlock/Maxlock.otf') format('truetype'),
+  url('../../../assets/maxlock/Maxlock.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Blenda-script';
-  src: url('../../../../assets/blenda_script/Blenda\ Script.otf') format('truetype'),
-  url('../../../../assets/blenda_script/Blenda\ Script.otf') format('opentype');
+  src: url('../../../assets/blenda_script/Blenda\ Script.otf') format('truetype'),
+  url('../../../assets/blenda_script/Blenda\ Script.otf') format('opentype');
 }
 
 /* Estilos generales */
@@ -26,16 +26,6 @@
     min-height: 100vh;
     opacity: 0;
     animation: fadeIn 1.5s forwards;
-  }
-  /* Definición de la animación de desvanecimiento */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-  
-    100% {
-      opacity: 1;
-    }
   }
   
   /* Estilos del encabezado */
@@ -95,18 +85,6 @@
     }
   }
   
-  /*vista horizontal*/
-  @media (orientation: landscape) and (max-width: 760px) {
-    header {
-      height: 35px;
-    }
-  }
-  @media (orientation: landscape) and (min-width: 1024px) {
-    header {
-      height: 120px;
-    }
-  }
-  
   /* Menú responsive */
   .menu-toggle {
     display: none;
@@ -122,56 +100,16 @@
     }
   }
   
-  /* Diseño responsivo */
-  @media (max-width: 500px) {
-    nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background-color: #333;
-      width: 300px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    nav.active {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .menu-toggle {
-      display: flex;
-    }
-  
-    nav ul {
-      flex-direction: column;
-    }
-  
-    nav ul li {
-      margin: 10px 0;
-    }
-  }
   .section {
-      background-color: #f8f8f8;
+    background-color: #f8f8f8;
   }
-  @media (max-width: 768px) {
-    .contenido {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 90%;
-    }
-  
-    .contenido .textoBarberia {
-      order: -1;
-      text-align: center;
-    }
-  
-    .contenido img {
-      order: 1;
-      max-width: 100%;
-    }
+  .parallax {
+    background-image: url("../../../assets/img/barberia-vigo.jpg");
+    height: 550px;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   .container {
@@ -261,7 +199,6 @@
     }
   }
   
-  
   footer {
     background-color: #222;
     color: white;
@@ -291,71 +228,149 @@
     }
   }
   
-/*Secciones de texto del main*/
-section {
+  /*vista horizontal*/
+  @media (orientation: landscape) and (max-width: 760px) {
+    header {
+      height: 35px;
+    }
+  }
+  @media (orientation: landscape) and (min-width: 1024px) {
+    header {
+      height: 120px;
+    }
+  }
+  
+  /* Diseño responsivo */
+  @media (max-width: 500px) {
+    nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #333;
+      width: 300px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+  
+    nav.active {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .menu-toggle {
+      display: flex;
+    }
+  
+    nav ul {
+      flex-direction: column;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .contenido {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 90%;
+    }
+  
+    .contenido .textoBarberia {
+      order: -1;
+      text-align: center;
+    }
+  
+    .contenido img {
+      order: 1;
+      max-width: 100%;
+    }
+  }
+  
+  /* Definición de la animación de desvanecimiento */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
+  }
+
+/* Definición de la animación de aparición */
+@keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Estilos responsivos para la sección "Acerca de" */
+  @media (max-width: 768px) {
+    .about {
+      padding: 20px;
+    }
+  
+    .about h1 {
+      font-size: 24px;
+    }
+  
+    .about p {
+      font-size: 16px;
+    }
+  }
+  
+  /* Estilos para la sección principal */
+  main {
     display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 50px 30px;
-    background-color: #f8f8f8;
-    gap: 20px;
-    flex-wrap: wrap;
-    h2 {
-        font-size: 32px;
-        color: #333;
-        margin-bottom: 20px;
-        text-align: center;
-        border-bottom: thin gray solid;
-        padding-bottom: 8px;
-        display: inline-block;
-        margin-left: auto;
-        margin-right: auto;
-        animation: fadeIn 2s forwards;
-        font-family: 'Maxlock', sans-serif;
-    }
-    p {
-        font-size: 18px;
-        color: #666;
-        margin-bottom: 30px;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+    /* Estilos para la sección "Acerca de" */
+    .about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 800px;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.5s forwards;
+  
+      /*Estilos para la imagen */
+      .about-image {
         width: 100%;
-        text-align: center;
-        animation: fadeIn 2s forwards;
+        max-width: 300px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 28px;
+        color: #222;
+        margin-bottom: 15px;
+      }
+  
+      p {
+        font-size: 18px;
+        color: #555;
+        line-height: 1.6;
+      }
     }
-}
-
-        /*Seccion del equipo  de la peluqueria*/
-        .container {
-            justify-content: space-around;
-            width: 100%;
-            animation: fadeIn 2s forwards;
-        }
-        /*Seccion de miembros  de la peluqueria*/
-        .team-member {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 250px;
-            transition: transform 0.3s ease;
-            img {
-                width: 100%;
-                border-radius: 50%;
-                max-width: 150px;
-                margin-bottom: 15px;
-            }
-            h3 {
-                font-size: 24px;
-                color: #333;
-                margin-bottom: 10px;
-            }
-            p {
-                font-size: 16px;
-                color: #666;
-            }
-        }
-
-        .team-member:hover {
-            transform: scale(1.05);
-        }  
+  }
+  

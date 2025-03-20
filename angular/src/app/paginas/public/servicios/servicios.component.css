@@ -1,15 +1,17 @@
 /*Fuentes de letras exportadas*/
 @font-face {
   font-family: 'Maxlock';
-  src: url('../../../../assets/maxlock/Maxlock.otf') format('truetype'),
-  url('../../../../assets/maxlock/Maxlock.otf') format('opentype');
+  src: url('../../../assets/maxlock/Maxlock.otf') format('truetype'),
+  url('../../../assets/maxlock/Maxlock.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'Blenda-script';
-  src: url('../../../../assets/blenda_script/Blenda\ Script.otf') format('truetype'),
-  url('../../../../assets/blenda_script/Blenda\ Script.otf') format('opentype');
+  src: url('../../../assets/blenda_script/Blenda\ Script.otf') format('truetype'),
+  url('../../../assets/blenda_script/Blenda\ Script.otf') format('opentype');
 }
+
+
 
 /* Estilos generales */
 * {
@@ -26,6 +28,16 @@
     min-height: 100vh;
     opacity: 0;
     animation: fadeIn 1.5s forwards;
+  }
+  /* Definición de la animación de desvanecimiento */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+  
+    100% {
+      opacity: 1;
+    }
   }
   
   /* Estilos del encabezado */
@@ -85,6 +97,18 @@
     }
   }
   
+  /*vista horizontal*/
+  @media (orientation: landscape) and (max-width: 760px) {
+    header {
+      height: 35px;
+    }
+  }
+  @media (orientation: landscape) and (min-width: 1024px) {
+    header {
+      height: 120px;
+    }
+  }
+  
   /* Menú responsive */
   .menu-toggle {
     display: none;
@@ -100,11 +124,59 @@
     }
   }
   
+  /* Diseño responsivo */
+  @media (max-width: 500px) {
+    nav {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background-color: #333;
+      width: 300px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+  
+    nav.active {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .menu-toggle {
+      display: flex;
+    }
+  
+    nav ul {
+      flex-direction: column;
+    }
+  
+    nav ul li {
+      margin: 10px 0;
+    }
+  }
   .section {
-    background-color: #f8f8f8;
+      background-color: #f8f8f8;
+  }
+  @media (max-width: 768px) {
+    .contenido {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 90%;
+    }
+  
+    .contenido .textoBarberia {
+      order: -1;
+      text-align: center;
+    }
+  
+    .contenido img {
+      order: 1;
+      max-width: 100%;
+    }
   }
   .parallax {
-    background-image: url("../../../../assets/img/barberia-vigo.jpg");
+    background-image: url("../../../assets/img/barberia-vigo.jpg");
     height: 550px;
     background-attachment: fixed;
     background-position: center;
@@ -199,6 +271,7 @@
     }
   }
   
+  
   footer {
     background-color: #222;
     color: white;
@@ -228,149 +301,118 @@
     }
   }
   
-  /*vista horizontal*/
-  @media (orientation: landscape) and (max-width: 760px) {
-    header {
-      height: 35px;
-    }
-  }
-  @media (orientation: landscape) and (min-width: 1024px) {
-    header {
-      height: 120px;
-    }
-  }
-  
-  /* Diseño responsivo */
-  @media (max-width: 500px) {
-    nav {
-      display: none;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background-color: #333;
-      width: 300px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-  
-    nav.active {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .menu-toggle {
-      display: flex;
-    }
-  
-    nav ul {
-      flex-direction: column;
-    }
-  
-    nav ul li {
-      margin: 10px 0;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .contenido {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      width: 90%;
-    }
-  
-    .contenido .textoBarberia {
-      order: -1;
-      text-align: center;
-    }
-  
-    .contenido img {
-      order: 1;
-      max-width: 100%;
-    }
-  }
-  
-  /* Definición de la animación de desvanecimiento */
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-  
-    100% {
-      opacity: 1;
-    }
-  }
-
-/* Definición de la animación de aparición */
-@keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-  
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Estilos responsivos para la sección "Acerca de" */
-  @media (max-width: 768px) {
-    .about {
-      padding: 20px;
-    }
-  
-    .about h1 {
-      font-size: 24px;
-    }
-  
-    .about p {
-      font-size: 16px;
-    }
-  }
-  
-  /* Estilos para la sección principal */
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-    padding: 50px 20px;
-    background-color: #f4f4f4;
-    /* Estilos para la sección "Acerca de" */
-    .about {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      max-width: 800px;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1.5s forwards;
-  
-      /*Estilos para la imagen */
-      .about-image {
-        width: 100%;
-        max-width: 300px;
-        border-radius: 10px;
+/*Secciones de texto del main*/
+.section {
+    padding: 30px 30px;
+    text-align: center;
+    h2 {
+        font-size: 32px;
+        color: #333;
         margin-bottom: 20px;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        font-size: 28px;
-        color: #222;
-        margin-bottom: 15px;
-      }
-  
-      p {
-        font-size: 18px;
-        color: #555;
-        line-height: 1.6;
-      }
+        font-family: 'Maxlock', sans-serif;
     }
-  }
+}
+/* Decoracion de titulos h2*/
+.h2titulos{
+    border-bottom:thin gray solid;
+    padding-bottom: 8px;
+    min-width: 450px;
+    width:  auto;
+    display:inline-block;
+   
+}
+
+/* Contenedor de servicios */
+.container {
+    justify-content: center;
+    margin-top: 30px;
+    .service {
+        background-color: #fff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+        /* fotos de servicios */
+        img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        /*Texto de servicios */
+        h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+        }
+    }
+    
+}
+
+/* Comentarios de clientes */
+.comentarios {
+    padding: 50px 5%;
+    background-color: #fff;
+    text-align: center;
+    h2 {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 30px;
+    }
+    .comentario {
+        display: flex;
+        align-items: center;
+        background-color: #f8f8f8;
+        border-left: 5px solid #e67e22;
+        padding: 20px;
+        margin: 20px auto;
+        max-width: 900px;
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        flex-wrap: wrap;
+        img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover;
+            border: 3px solid #e67e22;
+        }
+        .texto {
+            flex: 1;
+            min-width: 250px;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+            margin: 5px 0;
+        }
+        .cliente {
+            font-weight: bold;
+            color: #e67e22;
+            margin-top: 10px;
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .comentario {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .comentario img {
+        margin-bottom: 15px;
+        margin-right: 0;
+    }
+}
+
   

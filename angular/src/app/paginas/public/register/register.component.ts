@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { HeaderComponent } from '../../../header/header.component';
+import { HeaderComponent } from '../../../components/header/header.component';
 import { FormBuilder, NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
 import { AuthService } from '../../private/services/auth.service';

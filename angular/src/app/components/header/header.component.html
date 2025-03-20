@@ -7,12 +7,6 @@
         alt="Logo de la Peluquería"
       />
     </a>
-    <div class="menu-toggle" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
 
     <!-- Menú de navegación -->
     <nav id="menu">
@@ -22,7 +16,21 @@
         <li><a routerLink="/servicios" routerLinkActive="active">Servicios</a></li>
         <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
         <li><a routerLink="/acercaDe" routerLinkActive="active">Acerca de</a></li>
-        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        <!-- Menú condicional para ev -->
+        @if (!isAuthenticated()) {
+          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a routerLink="/register" routerLinkActive="active">Registro</a></li>
+        } @else {
+          <li class="dropdown" (click)="toggleMenu()">
+            <a class="dropdown-toggle">
+              {{ userName || 'Usuario' }}
+            </a>
+            <ul class="dropdown-menu" [class.show]="isMenuOpen()">
+              <li><a (click)="navigateToProfile()">Perfil</a></li>
+              <li><a (click)="logout()">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        }
       </ul>
     </nav>
   </header>
