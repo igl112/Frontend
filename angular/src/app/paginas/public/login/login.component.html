@@ -9,12 +9,12 @@
             <h1>Login</h1>
             <div class="textfield">
                 <label for="user">User</label>
-                <input type="text" [(ngModel)]="apiLoginObj.EmailId" name="user" placeholder="User">
+                <input type="text" [(ngModel)]="loginObj.email" name="user" placeholder="User">
             </div>
 
             <div class="textfield">
                 <label for="password">Password</label>
-                <input type="password" [(ngModel)]="apiLoginObj.Password" name="password" placeholder="Password">
+                <input type="password" [(ngModel)]="loginObj.contrasena" name="password" placeholder="Password">
             </div>
 
             <button class="btn-login" (click)="onLogin()">Login</button>
