@@ -1,0 +1,26 @@
+<button (click) = "getClients()" style="margin-top: 150px;">CLIENTES</button>
+<table style="margin-top: 10px;">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>NombreUsuario</th>
+            <th>email</th>
+            <th>tlf</th>
+            <th>Direccion completa</th>
+            <th>DNI</th>
+            <th>contrasena</th>
+        </tr>
+    </thead>
+    @for (item of clientlist; track $index) {
+        <tr>
+            <td>{{item.nombre + ' ' + item.apellidos}}</td>
+            <td>{{item.nombreUsuario}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.tlf}}</td>
+            <td>{{item.provincia + ', ' + item.municipio + ', ' + item.direccion}}</td>
+            <td>{{item.DNI}}</td>
+            <td>{{item.contrasena}}</td>
+            <td><button (click)="deleteClient(item.id)" style="background-color: red; color: white;">Borrar cliente</button></td>
+        </tr>
+    }
+</table>
