@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { catchError, throwError } from 'rxjs';
-import { AuthService } from '../../private/services/auth.service';
+import { AuthService } from '../../../services/authService/auth.service';
 import { Router } from '@angular/router';
 
 @Component({

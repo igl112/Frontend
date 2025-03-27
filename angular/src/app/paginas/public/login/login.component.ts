@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../private/services/auth.service';
+import { AuthService } from '../../../services/authService/auth.service';
 
 
 @Component({

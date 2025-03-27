@@ -54,6 +54,8 @@ export class AuthService {
           'Content-Type': 'application/json',
         });
 
+        console.log(credentials)
+
         return this.http.post(this.registerURL, credentials, {
           withCredentials: true,
           headers: headers,

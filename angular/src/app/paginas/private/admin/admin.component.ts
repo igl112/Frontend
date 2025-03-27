@@ -4,7 +4,7 @@ import { HeadComponent } from '../../../components/head/head.component';
 import { FooterComponent } from '../../../components/footer/footer.component';
 import { HeaderComponent } from '../../../components/header/header.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../../services/authService/auth.service';
 import { catchError, mergeMap, throwError } from 'rxjs';
 import { CustomerListComponentComponent } from '../../../components/customer-list-component/customer-list-component.component';
 
