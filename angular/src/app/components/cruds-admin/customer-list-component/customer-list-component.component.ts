@@ -10,17 +10,17 @@ import {
   ViewContainerRef,
   viewChild,
 } from '@angular/core';
-import { AuthService } from '../../services/authService/auth.service';
-import { firstValueFrom, skip, take } from 'rxjs';
+import { AuthService } from '../../../services/authService/auth.service';
+import { firstValueFrom, mergeMap, skip, take } from 'rxjs';
 import { bootstrapApplication } from '@angular/platform-browser';
 import {
   NonNullableFormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ClientService } from '../../services/clientService/client.service';
+import { ClientService } from '../../../services/clientService/client.service';
 import { DOCUMENT } from '@angular/common';
-import { UpdateData } from '../../interfaces/update-data';
+import { UpdateData } from '../../../interfaces/update-data';
 
 @Component({
   selector: 'app-customer-list-component',
@@ -33,9 +33,12 @@ export class CustomerListComponentComponent {
   private clientService = inject(ClientService);
   private document = inject(DOCUMENT);
   private renderer = inject(Renderer2);
+  private http = inject(HttpClient)
   private fb = inject(NonNullableFormBuilder); // Usamos NonNullableFormBuilder para garantizar que los valores nunca sean null o undefined.
   clientlist: any[] = [];
   updateArray: any[] = [];
+  url = 'http://localhost:8001/customers';
+
 
   updateForm = this.fb.group({
     nombre: ['', [Validators.maxLength(255)]],
@@ -78,31 +81,39 @@ export class CustomerListComponentComponent {
 
   loadClients() {
     if (this.filterForm.valid) {
-      let filterformValue = this.filterForm.value
+      let filterformValue = this.filterForm.value;
 
       const paramsObj = {
-        nombre: filterformValue.nombre? filterformValue.nombre : '',
-        apellidos: filterformValue.apellidos? filterformValue.apellidos : '',
-        tlf: filterformValue.tlf? filterformValue.tlf : '',
-        DNI: filterformValue.DNI? filterformValue.DNI : '',
-        email: filterformValue.nombre? filterformValue.nombre : '',
-        skip: filterformValue.pagina? ((+filterformValue.pagina)*10)-10 : '',
-        take: 10
-      }
+        nombre: filterformValue.nombre ? filterformValue.nombre : '',
+        apellidos: filterformValue.apellidos ? filterformValue.apellidos : '',
+        tlf: filterformValue.tlf ? filterformValue.tlf : '',
+        DNI: filterformValue.DNI ? filterformValue.DNI : '',
+        email: filterformValue.nombre ? filterformValue.nombre : '',
+        skip: filterformValue.pagina ? +filterformValue.pagina * 10 - 10 : '',
+        take: 10,
+      };
 
       let params = Object.values(paramsObj);
 
-      console.log(params)
-        this.clientService.getClients(params).subscribe((res: any) => {
-        this.clientlist = res;
-      }); 
+      this.clientService.get(this.url,params).subscribe({
+        next: (res: any) => {
+          this.clientlist = res;
+        },
+        // en caso de que falle hace una llamada por defecto
+        error: (err) => {
+          this.clientService.get(this.url).subscribe((res: any) => {
+            alert('Clientes no encontrados');
+            this.clientlist = res;
+          });
+        },
+      });
     } else {
       alert('Formulario inválido');
     }
   }
 
   delete(id: number) {
-    this.clientService.deleteClient(id).subscribe((res: any) => {
+    this.clientService.delete(this.url, id).subscribe((res: any) => {
       //todo: hacer esto sin llamada, borrar elemento en front
       this.loadClients();
       alert(res.message);
@@ -120,7 +131,7 @@ export class CustomerListComponentComponent {
   async update(id: number) {
     if (this.updateForm.valid) {
       const formData = this.updateForm.value;
-      let clientObj = await firstValueFrom(this.clientService.getClient(id));
+      let clientObj = await firstValueFrom(this.clientService.getSingular(this.url, id));
       let client = Object.values(Object.values(clientObj)[0]);
 
       const updateData = {
@@ -141,7 +152,7 @@ export class CustomerListComponentComponent {
           : client[8],
       };
 
-      this.clientService.update(id, updateData).subscribe((res: any) => {
+      this.clientService.update(this.url, id, updateData).subscribe((res: any) => {
         this.loadClients();
       });
 
@@ -154,4 +165,41 @@ export class CustomerListComponentComponent {
       alert('Formulario inválido');
     }
   }
+
+  add(){
+    if (this.addForm.valid) {
+      const formData = this.updateForm.value;
+
+      const registerData = {
+        nombre: formData.nombre ,
+        apellidos: formData.apellidos ,
+        nombreUsuario: formData.nombreUsuario,
+        provincia: formData.provincia,
+        municipio: formData.municipio,
+        direccion: formData.direccion,
+        tlf: formData.tlf,
+        DNI: formData.DNI,
+        email: formData.email,
+        contrasena: formData.contrasena,
+        contrasena_confirmation: formData.contrasena,
+      };
+        
+      this.authService.getCsrfToken().pipe(
+        mergeMap((response) => {
+          const headers = new HttpHeaders({
+            'X-CSRF-TOKEN': response.csrf_token,
+            'Content-Type': 'application/json',
+          });
+  
+          return this.http.post(this.url, registerData, {
+            withCredentials: true,
+            headers: headers,
+          });
+        }),
+      );
+    } else {
+      alert('Formulario inválido');
+    }
+  }
+  
 }

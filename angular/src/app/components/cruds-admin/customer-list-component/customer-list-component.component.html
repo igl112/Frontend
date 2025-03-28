@@ -70,3 +70,32 @@
   </div>
   <!-- <app-update-form id="updateForm{{item.id}}" style="display: none" [formId]="item.id"/> -->
 }
+
+<div id="addForm" >
+  <form #updateFormLabel (ngSubmit)="add()" [formGroup]="addForm">
+    <input type="text" formControlName="nombre" placeholder="Nombre" />
+    <input type="text" formControlName="apellidos" placeholder="Apellidos" />
+    <input
+      type="text"
+      formControlName="nombreUsuario"
+      placeholder="Nombre usuario"
+    />
+    <input type="text" formControlName="provincia" placeholder="provincia" />
+    <input type="text" formControlName="municipio" placeholder="municipio" />
+    <input type="text" formControlName="direccion" placeholder="direccion" />
+    <input type="text" formControlName="tlf" placeholder="tlf" />
+    <input type="text" formControlName="DNI" placeholder="DNI" />
+    <input type="email" formControlName="email" placeholder="Email" />
+    <input
+      type="password"
+      formControlName="contrasena"
+      placeholder="Password"
+    />
+    <input
+      type="password"
+      formControlName="contrasena_confirmation"
+      placeholder="Password"
+    />
+    <input class="button" type="submit" value="Update" />
+  </form>
+</div>

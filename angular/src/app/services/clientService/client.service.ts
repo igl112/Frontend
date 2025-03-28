@@ -27,34 +27,38 @@ export class ClientService {
     });
   }
 
-  getClients(parameters: Array<any>) {
-    let fullURL = 
-    `${this.url}?nombre=${parameters[0]}&apellidos=${parameters[1]}&tlf=${parameters[2]}&DNI=${parameters[3]}&skip=${parameters[5]}&take=10`;
-    console.log(fullURL);
-    console.log(parameters.toString());
+  get( url : string, parameters?: Array<any>) {
+    let fullURL;
+    if (parameters) {
+      fullURL = 
+    `${url}?nombre=${parameters[0]}&apellidos=${parameters[1]}&tlf=${parameters[2]}&DNI=${parameters[3]}&skip=${parameters[5]}&take=10`;
+    } else {
+      fullURL = url
+    }
+    
     return this.http.get(fullURL, {
       headers: this.headers,
     });
   }
 
-  getClient(id: number) {
-    return this.http.get(this.url + '/' + id, {
+  getSingular(url : string, id: number) {
+    return this.http.get(url + '/' + id, {
       headers: this.headers,
       withCredentials: true,
     });
   }
 
-  deleteClient(id: number) {
-    return this.http.delete(this.url + '/' + id, {
+  delete(url : string, id: number) {
+    return this.http.delete(url + '/' + id, {
       headers: this.headers,
       withCredentials: true,
     });
   }
 
-  update(id: number, updateData: Object) {
+  update(url : string, id: number, updateData: Object) {
     console.log(updateData);
 
-    return this.http.put(this.url + '/' + id, updateData, {
+    return this.http.put(url + '/' + id, updateData, {
       headers: this.headers,
       withCredentials: true,
     });
