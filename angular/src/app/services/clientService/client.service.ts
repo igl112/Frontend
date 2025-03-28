@@ -22,6 +22,7 @@ export class ClientService {
       this.headers = new HttpHeaders({
         'X-CSRF-TOKEN': res.csrf_token,
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('authToken')
       });
     });
   }
@@ -58,38 +59,4 @@ export class ClientService {
       withCredentials: true,
     });
   }
-
-  /*   update(id: number) {
-    if (this.updateForm.valid) {
-      const formData = this.updateForm.value;
-
-      const updateData = {
-        nombre: formData.nombre ? formData.nombre : null,
-        apellidos: formData.apellidos ? formData.apellidos : null,
-        nombreUsuario: formData.nombreUsuario ? formData.nombreUsuario : null,
-        provincia: formData.provincia ? formData.provincia : null,
-        municipia: formData.municipio ? formData.municipio : null,
-        direccion: formData.direccion ? formData.direccion : null,
-        tlf: formData.tlf ? formData.tlf : null,
-        DNI: formData.DNI ? formData.DNI : null,
-        email: formData.email ? formData.email : null,
-        contrasena: formData.contrasena ? formData.contrasena : null,
-      };
-
-      console.log(updateData);
-
-      this.http
-        .put(this.urls[1] + '/' + formData.id, formData, {
-          headers: this.headers,
-          withCredentials: true,
-        })
-        .subscribe((res: any) => {
-          this.getClients();
-          alert(res.mensaje);
-        });
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
-} */
 }
