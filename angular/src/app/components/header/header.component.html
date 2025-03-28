@@ -22,7 +22,21 @@
         <li><a routerLink="/servicios" routerLinkActive="active">Servicios</a></li>
         <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
         <li><a routerLink="/acercaDe" routerLinkActive="active">Acerca de</a></li>
-        <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+        @if (isLoggedIn) {
+          <li>
+            <button style="	background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;" (click)="logout()">Logout</button>
+          </li>
+          <li style="background-color: blue; border-radius: 5px; padding: 3px;"><a routerLink="/admin" routerLinkActive="active">Admin</a></li>
+        } @else {
+          <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+          <li><a routerLink="/register" routerLinkActive="active">Registro</a></li>
+        }
       </ul>
     </nav>
   </header>

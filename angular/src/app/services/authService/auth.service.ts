@@ -10,6 +10,7 @@ import { catchError, map, mergeMap, tap, throwError } from 'rxjs';
 export class AuthService {
   baseURL = 'http://localhost:8001/login'; // Aquí va la url
   registerURL = 'http://localhost:8001/register';
+  logoutURL = 'http://localhost:8001/logout'
 
   router = inject(Router);
   http = inject(HttpClient);
@@ -40,6 +41,29 @@ export class AuthService {
       }),
       catchError((error) => {
         console.error('Error en el login:', error);
+        return throwError(() => new Error(error));
+      })
+    );
+  }
+
+  logout(token : string): Observable<any> {
+    return this.getCsrfToken().pipe(
+      mergeMap((response) => {
+        // Configura los encabezados para incluir el token CSRF
+        const headers = new HttpHeaders({
+          'X-CSRF-TOKEN': response.csrf_token,
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        });
+
+        // Realiza la solicitud POST con el token CSRF
+        return this.http.post(this.logoutURL, null, {
+          withCredentials: true, // Asegúrate de que las cookies sean enviadas
+          headers: headers,
+        });
+      }),
+      catchError((error) => {
+        console.error('Error en el logout:', error);
         return throwError(() => new Error(error));
       })
     );

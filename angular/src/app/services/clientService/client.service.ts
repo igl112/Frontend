@@ -22,74 +22,45 @@ export class ClientService {
       this.headers = new HttpHeaders({
         'X-CSRF-TOKEN': res.csrf_token,
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('authToken')
       });
     });
   }
 
-  getClients(parameters: Array<any>) {
-    let fullURL = 
-    `${this.url}?nombre=${parameters[0]}&apellidos=${parameters[1]}&tlf=${parameters[2]}&DNI=${parameters[3]}&skip=${parameters[5]}&take=10`;
-    console.log(fullURL);
-    console.log(parameters.toString());
+  get( url : string, parameters?: Array<any>) {
+    let fullURL;
+    if (parameters) {
+      fullURL = 
+    `${url}?nombre=${parameters[0]}&apellidos=${parameters[1]}&tlf=${parameters[2]}&DNI=${parameters[3]}&skip=${parameters[5]}&take=10`;
+    } else {
+      fullURL = url
+    }
+    
     return this.http.get(fullURL, {
       headers: this.headers,
     });
   }
 
-  getClient(id: number) {
-    return this.http.get(this.url + '/' + id, {
+  getSingular(url : string, id: number) {
+    return this.http.get(url + '/' + id, {
       headers: this.headers,
       withCredentials: true,
     });
   }
 
-  deleteClient(id: number) {
-    return this.http.delete(this.url + '/' + id, {
+  delete(url : string, id: number) {
+    return this.http.delete(url + '/' + id, {
       headers: this.headers,
       withCredentials: true,
     });
   }
 
-  update(id: number, updateData: Object) {
+  update(url : string, id: number, updateData: Object) {
     console.log(updateData);
 
-    return this.http.put(this.url + '/' + id, updateData, {
+    return this.http.put(url + '/' + id, updateData, {
       headers: this.headers,
       withCredentials: true,
     });
   }
-
-  /*   update(id: number) {
-    if (this.updateForm.valid) {
-      const formData = this.updateForm.value;
-
-      const updateData = {
-        nombre: formData.nombre ? formData.nombre : null,
-        apellidos: formData.apellidos ? formData.apellidos : null,
-        nombreUsuario: formData.nombreUsuario ? formData.nombreUsuario : null,
-        provincia: formData.provincia ? formData.provincia : null,
-        municipia: formData.municipio ? formData.municipio : null,
-        direccion: formData.direccion ? formData.direccion : null,
-        tlf: formData.tlf ? formData.tlf : null,
-        DNI: formData.DNI ? formData.DNI : null,
-        email: formData.email ? formData.email : null,
-        contrasena: formData.contrasena ? formData.contrasena : null,
-      };
-
-      console.log(updateData);
-
-      this.http
-        .put(this.urls[1] + '/' + formData.id, formData, {
-          headers: this.headers,
-          withCredentials: true,
-        })
-        .subscribe((res: any) => {
-          this.getClients();
-          alert(res.mensaje);
-        });
-    } else {
-      console.log('Formulario inválido');
-    }
-  }
-} */
 }

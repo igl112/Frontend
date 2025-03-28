@@ -53,8 +53,10 @@ export class RegisterComponent {
         )
         .subscribe(
           (response) => {
+            localStorage.setItem('authToken', response.access_token);
             console.log('Usuario registrado exitosamente', response);
-            this.router.navigate(['/login']);
+            this.router.navigate(['/']);
+            
           },
           (error) => {
             console.error('Error al registrar usuario:', error);

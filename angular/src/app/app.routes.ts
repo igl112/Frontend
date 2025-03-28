@@ -19,8 +19,15 @@ export const routes: Routes = [
     children: [
       //Aquí van las páginas que se podrán ver al estar loggeado.
       { path: 'admin', component: AdminComponent },
+      { path: 'inicio', component: IndexComponent },
+      { path: 'equipo', component: EquipoComponent },
+      { path: 'servicios', component: ServiciosComponent },
+      { path: 'contacto', component: ContactoComponent },
+      { path: 'acercaDe', component: AcercaDeComponent },
+      { path: 'register', component: RegisterComponent },
     ],
   },
+  //rutas mientras el login se esta trabajando, borrar despues
   { path: 'inicio', component: IndexComponent },
   { path: 'equipo', component: EquipoComponent },
   { path: 'servicios', component: ServiciosComponent },
