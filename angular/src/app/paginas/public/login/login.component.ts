@@ -25,6 +25,7 @@ export class LoginComponent {
     onLogin() {
       this.authService.login(this.loginObj).subscribe(
         response => {
+          localStorage.setItem('authToken', response.token)
           console.log('Login exitoso:', response);
         },
         error => {
