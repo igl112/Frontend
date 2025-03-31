@@ -1,38 +1,29 @@
 import { Component, HostListener, signal, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../paginas/private/services/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   isMenuOpen = signal(false);
   private authService = inject(AuthService);
   private router = inject(Router);
-  currentUser = this.authService.getUser()
-  isAuthenticated = this.authService.isAuthenticated.asReadonly();
+
+  // Acceso directo a las señales del servicio
+  user = this.authService.currentUser;
+  isAuthenticated = this.authService.currentUser; // Usamos la misma señal para autenticación
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.authService.initializeAuthState();
-  }
 
   get userName(): string {
-    return this.authService.userName || 'null';
-  }
-
-  logout(): void {
-    this.authService.logout().subscribe({
-      next: () => {
-        this.isMenuOpen.set(false);
-        this.router.navigate(['/inicio']);
-      },
-      error: (err) => console.error('Error al cerrar sesión:', err)
-    });
+    return this.user()?.nombreUsuario || 'Invitado';
   }
 
   toggleMenu(): void {
@@ -50,5 +41,4 @@ export class HeaderComponent implements OnInit {
     this.isMenuOpen.set(false);
     this.router.navigate(['/perfil']);
   }
-
 }

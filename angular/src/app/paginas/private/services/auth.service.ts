@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { effect, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { catchError, map, mergeMap, tap, throwError, of } from 'rxjs';
 
 //Usamos interface user para declarar los tipados
@@ -34,34 +34,35 @@ export class AuthService {
   registerURL = 'http://localhost:8001/register';
   loginUrl = 'http://localhost:8001/login';
 
-  private currentUser = signal<Usuario | null>(null);
+  private readonly TOKEN_KEY = 'auth_token';
+  token = signal<string | null>(null);
+
+  currentUser = signal<Usuario | null>(null);
   isAuthenticated = signal(false);
-  
 
   router = inject(Router);
   http = inject(HttpClient);
 
   constructor() {
-    this.initializeAuthState();
+    // Inicializar desde localStorage
+    const savedToken = localStorage.getItem(this.TOKEN_KEY);
+    this.token.set(savedToken);
+
+    // Persistir cambios automáticamente
+    effect(() => {
+      const currentToken = this.token();
+      currentToken 
+        ? localStorage.setItem(this.TOKEN_KEY, currentToken)
+        : localStorage.removeItem(this.TOKEN_KEY);
+    });
   }
 
-    // Limpiar datos de autenticación
-    private clearAuth(): void {
-      this.currentUser.set(null);
-      this.isAuthenticated.set(false);
-    }
+  saveToken(token: string): void {
+    this.token.set(token);
+  }
 
-  initializeAuthState(): void {
-    this.http.get<Usuario>(`${this.baseURL}/getUser`, { withCredentials: true }).pipe(
-      tap(user => {
-        this.currentUser.set(user);
-        this.isAuthenticated.set(true);
-      }),
-      catchError(() => {
-        this.clearAuth();
-        return of(null);
-      })
-    ).subscribe();
+  clearToken(): void {
+    this.token.set(null);
   }
 
   //Obtener el token
@@ -70,51 +71,9 @@ export class AuthService {
       withCredentials: true 
     });
   }
-  
 
   // Login
-
-  login(credentials: { email: string; contrasena: string }): Observable<Usuario> {
-    return this.getCsrfToken().pipe(
-      mergeMap((csrfResponse) => {
-        const headers = new HttpHeaders({
-          'X-CSRF-TOKEN': csrfResponse.csrf_token,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        });
-  
-        return this.http.post<{ user: Usuario; token?: string }>(this.loginUrl, credentials, {
-          withCredentials: true,
-          headers: headers
-        }).pipe(
-          mergeMap((loginResponse) => {
-            // Obtener datos completos del usuario
-            return this.http.get<Usuario>(`${this.baseURL}/getUser`).pipe(
-              tap((userResponse) => {
-                // Actualizar estado de autenticación
-                this.currentUser.set(userResponse);
-                this.isAuthenticated.set(true);
-                
-                // Guardar en localStorage si es necesario
-                if (loginResponse.token) {
-                  localStorage.setItem('access_token', loginResponse.token);
-                  localStorage.setItem('user_data', JSON.stringify(userResponse));
-                }
-              })
-            );
-          })
-        );
-      }),
-      catchError((error) => {
-        console.error('Detalles del error:', error.error);
-        return throwError(() => ({
-          message: error.error?.message || 'Error desconocido',
-          errors: error.error?.errors
-        }));
-      })
-    );
-  }
-  /*login(credentials: { email: string; contrasena: string }): Observable<any> {
+  login(credentials: { email: string; contrasena: string }): Observable<any> {
     return this.getCsrfToken().pipe(
       mergeMap((response) => {
         const headers = new HttpHeaders({
@@ -122,17 +81,24 @@ export class AuthService {
           'Content-Type': 'application/json',
         });
 
-       return this.http.post(this.loginUrl, credentials, {
+       return this.http.post<{ token: string }>(this.loginUrl, credentials, {
           withCredentials: true, 
           headers: headers,
         });
       }),
+      tap((loginResponse) => {
+        this.token.set(loginResponse.token), // Guardar token via signal
+        this.router.navigate(['/inicio']);
+      }),
       catchError((error) => {
+        this.token.set(null);
         console.error('Error en el login:', error);
         return throwError(() => new Error(error));
       })
     );
-  }*/
+  }
+
+  
 
   // Registro
   register(credentials: { nombre: string, nombreUsuario: string, email: string, contrasena: string, contrasena_confirmation: string }): Observable<any> {
@@ -155,7 +121,7 @@ export class AuthService {
     );
   }
 
-  logout(): Observable<any> {
+  /*logout(): Observable<any> {
     return this.getCsrfToken().pipe(
       mergeMap((response) => {
         const headers = new HttpHeaders({
@@ -179,7 +145,7 @@ export class AuthService {
         return throwError(() => new Error(error));
       })
     );
-  }
+  }*/
 
   // Obtener usuario autenticado
   getUser(): Observable<any> {

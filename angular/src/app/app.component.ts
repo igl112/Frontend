@@ -10,11 +10,7 @@ import { AuthService } from './paginas/private/services/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'angular';
   constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.initializeAuthState();
-  }
 }
