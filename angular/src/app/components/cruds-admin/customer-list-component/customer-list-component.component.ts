@@ -39,7 +39,6 @@ export class CustomerListComponentComponent {
   updateArray: any[] = [];
   url = 'http://localhost:8001/customers';
 
-
   updateForm = this.fb.group({
     nombre: ['', [Validators.maxLength(255)]],
     apellidos: ['', [Validators.maxLength(255)]],
@@ -66,7 +65,7 @@ export class CustomerListComponentComponent {
     nombre: ['', [Validators.required, Validators.maxLength(255)]],
     apellidos: ['', [Validators.required, Validators.maxLength(255)]],
     nombreUsuario: ['', [Validators.required, Validators.maxLength(255)]],
-    Provincia: ['', [Validators.required, Validators.maxLength(255)]],
+    provincia: ['', [Validators.required, Validators.maxLength(255)]],
     municipio: ['', [Validators.required, Validators.maxLength(255)]],
     direccion: ['', [Validators.required, Validators.maxLength(255)]],
     tlf: ['', [Validators.required, Validators.maxLength(255)]],
@@ -168,7 +167,7 @@ export class CustomerListComponentComponent {
 
   add(){
     if (this.addForm.valid) {
-      const formData = this.updateForm.value;
+      const formData = this.addForm.value;
 
       const registerData = {
         nombre: formData.nombre ,
@@ -184,7 +183,12 @@ export class CustomerListComponentComponent {
         contrasena_confirmation: formData.contrasena,
       };
         
-      this.authService.getCsrfToken().pipe(
+
+      this.clientService.add(this.url, registerData).subscribe((res : any) => {
+        this.loadClients();
+        console.log(res)
+      })
+/*       this.authService.getCsrfToken().pipe(
         mergeMap((response) => {
           const headers = new HttpHeaders({
             'X-CSRF-TOKEN': response.csrf_token,
@@ -196,7 +200,7 @@ export class CustomerListComponentComponent {
             headers: headers,
           });
         }),
-      );
+      ); */
     } else {
       alert('Formulario inválido');
     }

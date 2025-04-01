@@ -46,6 +46,7 @@
 
 @for (item of clientlist; track $index) {
   <div id="updateForm{{item.id}}" style="display: none;">
+    <h3>Actualizar usuario {{item.nombre}}</h3>
     <form #updateFormLabel (ngSubmit)="update(item.id)" [formGroup]="updateForm">
       <input type="text" formControlName="nombre" placeholder="Nombre" />
       <input type="text" formControlName="apellidos" placeholder="Apellidos" />
@@ -68,10 +69,10 @@
       <input class="button" type="submit" value="Update" />
     </form>
   </div>
-  <!-- <app-update-form id="updateForm{{item.id}}" style="display: none" [formId]="item.id"/> -->
 }
 
 <div id="addForm" >
+  <h2>Añadir usuario</h2>
   <form #updateFormLabel (ngSubmit)="add()" [formGroup]="addForm">
     <input type="text" formControlName="nombre" placeholder="Nombre" />
     <input type="text" formControlName="apellidos" placeholder="Apellidos" />

@@ -63,4 +63,13 @@ export class ClientService {
       withCredentials: true,
     });
   }
+
+  add(url : string, addData: Object) {
+    console.log(addData);
+
+    return this.http.post(url, addData, {
+      headers: this.headers,
+      withCredentials: true,
+    });
+  }
 }
