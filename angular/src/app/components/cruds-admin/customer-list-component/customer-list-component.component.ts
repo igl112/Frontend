@@ -188,19 +188,6 @@ export class CustomerListComponentComponent {
         this.loadClients();
         console.log(res)
       })
-/*       this.authService.getCsrfToken().pipe(
-        mergeMap((response) => {
-          const headers = new HttpHeaders({
-            'X-CSRF-TOKEN': response.csrf_token,
-            'Content-Type': 'application/json',
-          });
-  
-          return this.http.post(this.url, registerData, {
-            withCredentials: true,
-            headers: headers,
-          });
-        }),
-      ); */
     } else {
       alert('Formulario inválido');
     }
